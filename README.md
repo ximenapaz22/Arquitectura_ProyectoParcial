@@ -15,28 +15,24 @@ Para algunas partes de este proyecto se utiliza solamente el conjunto de datos d
 Los datos completos están disponibles en: https://datos.profeco.gob.mx/datos_abiertos/qqp.php
 
 ## Parte 1
-1. Limpieza de datos
-Antes de cargar al cluster, limpien los datos, toma una muestra y examina que puede salir mal, en principio el archivo tienes comas en las direcciones por lo que cuando lo quieras cargar como CSV vas a tener problemas. Hay que resolver eso. Tienes también caracteres especiales que puedes eliminar para obtener mejores resultados.
+### Limpieza de datos
+Se limpian los datos antes de cargarlos a S3. La base de datos es muy grande, por lo que se toma una muestra de los datos para hacer la exploración y se toman las decisiones para limpiar la base de datos. Luego se usa bash para limpiar los datos desde la terminal.
 
-Tips para limpieza
-Con iconv quitar todos los acentos que puedan venir ocupando: iconv -f utf8 -t ascii//TRANSLIT archivo_limpio.csv
+Para la limpieza:
+- Con iconv quitar todos los acentos que puedan venir ocupando: iconv -f utf8 -t ascii//TRANSLIT archivo_limpio.csv
+- Convertir a minúsculas
+- cambiar las comas de separación de variables por algún caracter tipo "|" 
 
-Pueden usar los comandos de bash o la librería de AWS o Python para los siguientes pasos:
-
-convertir a minúsculas
-cambiar las comas de separación de variables por algún caracter tipo |. Ojo con las comas que separan las direcciones, esas NO. HINT: Esta es la parte dificil, de alguna manera tienen que escapar esos caracteres. Esto de escapar caracteres en bash se hace con gsub y escapar caracteres con \.
-Sacar tu mejor juego para limpiar este dataset.
-
-2. Cluster en AWS con Hadoop y Pyspark
+### Cluster en AWS con Hadoop y Pyspark
 - cluster_156057
 
-3. ETL con el Cluster
+### ETL con el Cluster
 Deberán subir a S3 el archivo o archivos de la tabla que descarguen a S3.
 Carga el CSV en Spark
 Guarda el CSV como parquet en S3, particionalo por catalogo. (Utiliza todos los trucos que consideres).
 Carga el parquet en Spark
 
-4. Preguntas a responder
+### Preguntas a responder
 Utilizando PySpark, se realiza el siguiente análisis (por año) y sobre todos los catálogos:
 - ¿Cuántos catálogos diferentes tenemos?
 - ¿Cuáles son los 20 catálogos con más observaciones?
@@ -44,7 +40,7 @@ Utilizando PySpark, se realiza el siguiente análisis (por año) y sobre todos l
 - ¿Cuántas observaciones tenemos por estado?
 - De cada estado obtener: el número de catalogos diferentes por año, ¿ha aumentado el número de catálogos con el tiempo?
 
-5. Utilizando Spark se contestan las siguientes preguntas sobre el catálogo de frutas y legumbres procesadas:
+### Utilizando Spark se contestan las siguientes preguntas sobre el catálogo de frutas y legumbres procesadas:
 - ¿Cuańtas marcas diferentes tiene tu categoría?
 - ¿Cuál es la marca con mayor precio? ¿En qué estado?
 - ¿Cuál es la marca con menor precio en CDMX? (en aquel entonces Distrito Federal)
