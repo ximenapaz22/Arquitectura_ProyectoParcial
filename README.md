@@ -1,6 +1,6 @@
 # Quién es Quién en los Precios
 ## Objetivo
-Utilizar tecnologías de gran escala vista en clase para analizar el dataset de Quién es Quién en los precios. 
+Utilizar tecnologías de gran escala para analizar el dataset de Quién es Quién en los precios. 
 
 ## Herramientas usadas
 - SQL
