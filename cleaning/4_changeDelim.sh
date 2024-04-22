@@ -19,19 +19,19 @@ for file in "$input_dir"/*.csv; do
         continue
     fi
 
-    # Cambiar delimitador y eliminar comas no deseadas
+    # Cambiar delimitador y eliminar símbolos no deseados
     awk -F',' 'BEGIN {OFS = "|"} {
+        # Limpiar caracteres especiales de todas las columnas excepto la 11
         for (i = 1; i <= NF; i++) {
-            # Eliminar comas en todas las columnas excepto la 11
-            if (i != 11) gsub(/,/, "", $i);
+            if (i != 11) {
+                # Eliminar caracteres que no sean letras, números, espacios, puntos o guiones
+                gsub(/[^a-zA-Z0-9 .-]/, "", $i);
+            }
         }
-        # Construir la línea de salida
-        line = $1;
-        for (i = 2; i <= NF; i++) {
-            if (i == 11) line = line OFS "\"" $i "\"";  # Mantener comillas para preservar comas dentro de la columna 11
-            else line = line OFS $i;
-        }
-        print line;
+
+        # Reconstruir la línea con los nuevos delimitadores
+        $1=$1;  # Esta operación es un truco en awk para reconstruir $0 con el nuevo OFS
+        print $0;
     }' "$file" > "$output_file"
 done
 
