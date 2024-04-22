@@ -2,9 +2,11 @@
 ## Objetivo
 Utilizar tecnologías de gran escala vista en clase para analizar el dataset de Quién es Quién en los precios. 
 
-## Herramientas necesarias
-SQL
-Pyspark
+## Herramientas usadas
+- SQL
+- Pyspark
+- bash
+- AWS: Athena, S3
 
 ## Datos
 Quién es Quién en los precios. Registro histórico diario de más de 2,000 productos, a partir de 2015, en diversos establecimientos de la República Mexicana. Los dataset que vas a analizar van del 2018-2024.
