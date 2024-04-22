@@ -1,4 +1,6 @@
 # ignoramos la carpeta de data y todos sus contenidos
 data/
+.Rproj.user
+
 *.Rproj
 *.RData
