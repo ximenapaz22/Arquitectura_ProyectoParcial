@@ -19,19 +19,23 @@ for file in "$input_dir"/*.csv; do
         continue
     fi
 
-    # Cambiar delimitador y eliminar símbolos no deseados
-    awk -F',' 'BEGIN {OFS = "|"} {
-        # Limpiar caracteres especiales de todas las columnas excepto la 11
+    # Procesar el archivo con awk
+    gawk -v OFS='|' 'BEGIN {FPAT = "([^,]*)|(\"[^\"]+\")"} {
         for (i = 1; i <= NF; i++) {
-            if (i != 11) {
-                # Eliminar caracteres que no sean letras, números, espacios, puntos o guiones
-                gsub(/[^a-zA-Z0-9 .-]/, "", $i);
+            # No tocar la columna 11
+            if (i == 11) continue;
+            # Remover caracteres no deseados solo en las columnas permitidas
+            if (i != 6 && i != 7 && i != 14 && i != 15) {
+                gsub(/[[:cntrl:]]|[#%&()*;<=>?[\\\]^_`{|}~]/, "", $i);
+            }
+            # Si es una de las columnas que originalmente tenía un número, asegurarse de que no tenga puntos adicionales
+            if (i == 1 || i == 2 || i == 3 || i == 4 || i == 5 || i == 8 || i == 9 || i == 10 || i == 12 || i == 13) {
+                gsub(/\.{2,}/, ".", $i);
             }
         }
-
-        # Reconstruir la línea con los nuevos delimitadores
-        $1=$1;  # Esta operación es un truco en awk para reconstruir $0 con el nuevo OFS
-        print $0;
+        # Reemplazar el delimitador original por pipe y imprimir la línea
+        $1=$1; # Reconstituir $0 con el nuevo delimitador OFS
+        print;
     }' "$file" > "$output_file"
 done
 
