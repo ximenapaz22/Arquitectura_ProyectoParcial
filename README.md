@@ -71,3 +71,11 @@ A partir de aquí se utiliza Athena desde R o Python para contestar preguntas so
 
 
 ## Estructura del repositorio
+- README.md
+- data: carpeta con los datos de frutas y legumbres procesadas
+    - raw: contiene los datos originales
+    - processed: contiene los datos procesados hasta el paso de cambiar los delimitadores
+    - clean: contiene los datos limpios
+- cleaning: carpeta con los scripts de limpieza de datos
+    - NOTA: se incluyen los scripts con el orden numérico en el nombre para indicar el orden en que se deben ejecutar, sin embargo, notamos que PySpark no leía de manera correcta el archivo limpio, por lo que se hizo una limpieza adicional en R que sí leía el archivo correctamente y se arregló el tema del delimitador. Puede no ser el caso siempre, pero en este caso, se incluye el script de limpieza en R.
+- data_wrangling: carpeta con los scripts de Python para contestar las preguntas de interés
