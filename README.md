@@ -16,7 +16,7 @@ Para algunas partes de este proyecto se utiliza solamente el conjunto de datos d
 
 Los datos completos están disponibles en: https://datos.profeco.gob.mx/datos_abiertos/qqp.php
 
-## Parte 1
+## Parte A
 ### Limpieza de datos
 Se limpian los datos antes de cargarlos a S3. La base de datos es muy grande, por lo que se toma una muestra de los datos para hacer la exploración y se toman las decisiones para limpiar la base de datos. Luego se usa bash para limpiar los datos desde la terminal.
 
@@ -54,7 +54,7 @@ Utilizando PySpark, se realiza el siguiente análisis (por año) y sobre todos l
 - Gráfica de serie de tiempo por estado para la marca con mayor precio -en todos los años-, donde el eje equis es el año y el eje ye es el precio máximo.
 
 
-## Parte 2
+## Parte B
 Para esta parte se utiliza Athena. 
 - Se crea una base de datos profeco_db en Athena.
 - Se crea una tabla externa profeco dentro de la base de datos profeco_db
